@@ -258,8 +258,8 @@
                   <tbody
                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                   >
+                  @if($panen == 'null')
                     <tr class="text-gray-700 dark:text-gray-400">
-                      @if($panen == 'null')
                       <td class="px-2 py-2 text-sm">
                         -
                       </td>
@@ -281,8 +281,10 @@
                       <td class="px-2 py-2 text-sm">
                         -
                       </td>
-                      @else
-                      @foreach($panen as $panen)
+                    </tr>
+                  @else
+                    @foreach($panen as $panen)
+                    <tr class="text-gray-700 dark:text-gray-400">
                       <td class="px-2 py-2 text-sm">
                         {{$panen -> panen_ke}}
                       </td>
@@ -306,9 +308,9 @@
                       <td class="px-2 py-2 text-sm">
                       {{$panen -> bagi_hasil_mitra}}
                       </td>
-                      @endforeach
-                      @endif
                     </tr>
+                    @endforeach
+                    @endif
                   </tbody>
                 </table>
               </div>
