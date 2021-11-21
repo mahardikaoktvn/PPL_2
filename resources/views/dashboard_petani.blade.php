@@ -33,14 +33,15 @@
         <div class="col-xl-5 col-lg-5 col-md-5 co-sm-l2">
           <div class="about_box">
             <h2>FAMILI<br><strong class="black">Prediksi bagi hasil</strong></h2>
-            <input class="mt-4 form-control rounded shadow-xs" placeholder="Luas Lahan meter persegi" type="type" name="Luas Lahan">
+            <form action="/simulasi" method="post">
+            @csrf
+            <input class="mt-4 form-control rounded shadow-xs" placeholder="Luas Lahan meter persegi" type="type" name="luaslahan" required>
             <a>
-              <button
-                @click="openModalPrediksi">
-                Lihat Predikisi
+              <button type="submit">
+                Lihat Prediksi
               </button>
-              {{-- @include('partial.modal_prediksi') --}}
             </a>
+            </form>
           </div>
         </div>
         <div class="col-xl-7 col-lg-7 col-md-7 co-sm-l2">

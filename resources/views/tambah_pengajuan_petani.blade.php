@@ -59,15 +59,6 @@
                   id="tanggal_tanam"
                 />
               </label>
-              <label class="block text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Jumlah Bibit</span>
-                <input
-                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                  placeholder="100"
-                  name="jumlah_bibit"
-                  id="jumlah_bibit"
-                />
-              </label>
               <div class="form-group py-3">
                 <label class="text-sm" for="exampleFormControlFile2">Upload foto bukti Lahan</label>
                 <input name="foto_bukti_lahan" id="foto_bukti_lahan" type="file" class="form-control-file" id="exampleFormControlFile2">

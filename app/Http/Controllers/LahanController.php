@@ -23,7 +23,6 @@ class LahanController extends Controller
                 'luas_lahan' => 'required',
                 'id_desa' => 'required',
                 'tanggal_tanam' => 'required',
-                'jumlah_bibit' => 'required',
                 'foto_bukti_lahan' => 'required|mimes:jpeg,jpg,png,gif',
                 'dokumen_mou' => 'required|mimes:docx,doc,pdf',
             ]);
@@ -42,7 +41,7 @@ class LahanController extends Controller
                 $lahan -> id_petani = Auth::id();
                 $lahan -> foto_bukti_lahan = "assets/user/$pemilik/$imageName";
                 $lahan -> tanggal_tanam = $request -> tanggal_tanam;
-                $lahan -> jumlah_bibit = $request -> jumlah_bibit;
+                $lahan -> jumlah_bibit = round(4*(100 * $request->luas_lahan/144));
                 $lahan -> dokumen_mou = "assets/user/$pemilik/$docName";
                 $lahan -> id_verify_status = 0;
                 

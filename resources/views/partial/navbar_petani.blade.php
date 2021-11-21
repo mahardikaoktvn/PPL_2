@@ -25,7 +25,7 @@
                     <a href="/profile">
                       <img
                         class="object-cover w-12 h-12 rounded-full shadow-lg"
-                        src="{{Auth::user()->profile_photo}}"
+                        src="/{{Auth::user()->profile_photo}}"
                         alt=""
                         loading="lazy"
                       />

@@ -212,76 +212,44 @@
           <div class="text-gray-700">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
               <div class="w-full overflow-x-auto">
-                <table class="w-full whitespace-no-wrap">
+              <table class="w-full whitespace-no-wrap">
                   <thead>
                     <tr
                       class="tracking-wide text-left text-gray-700 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                     >
-                      <th class="px-2 py-2 text-medium text-sm">Panenan</th>
+                      <th class="px-2 py-2 text-medium text-sm">Panen Ke</th>
                       <th class="px-2 py-2 text-medium text-sm">Tanggal Pemanenan</th>
                       <th class="px-2 py-2 text-medium text-sm">Hasil(kg)</th>
-                      <th class="px-2 py-2 text-medium text-sm">Tanggal Penjualan</th>
-                      <th class="px-2 py-2 text-medium text-sm">Hasil Penjualan(rp)</th>
-                      <th class="px-2 py-2 text-medium text-sm">Bukti Penjualan</th>
-                      <th class="px-2 py-2 text-medium text-sm">Bagi Hasil Petani(rp)</th>
+                      <th class="px-2 py-2 text-medium text-sm">Kualitas Mutu</th>
+                      <th class="px-2 py-2 text-medium text-sm"></th>
                     </tr>
                   </thead>
                   <tbody
                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                   >
-                  @if($panen == 'null')
-                    <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                    </tr>
-                  @else
                     @foreach($panen as $panen)
                     <tr class="text-gray-700 dark:text-gray-400">
                       <td class="px-2 py-2 text-sm">
                         {{$panen -> panen_ke}}
                       </td>
                       <td class="px-2 py-2 text-sm">
-                      {{$panen -> tanggal_panen}}
+                        {{$panen -> tanggal_panen}}
                       </td>
                       <td class="px-2 py-2 text-sm">
-                      {{$panen -> hasil_panen}}
+                        {{$panen -> hasil_panen}}
                       </td>
                       <td class="px-2 py-2 text-sm">
-                      {{$panen -> tanggal_penjualan}}
+                        {{$panen -> kualitas_mutu}}
                       </td>
                       <td class="px-2 py-2 text-sm">
-                      {{$panen -> hasil_penjualan}}
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                      <a href="/{{$panen -> foto_bukti_penjualan}}" target="_blank" class="px-1 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-500 border border-transparent rounded-lg active:bg-green-500 hover:bg-green-700 focus:outline-none focus:shadow-outline-green">
-                        Download
-                      </a>
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                      {{$panen -> bagi_hasil_mitra}}
+                        <div class="flex justify-end" style="margin-left: -80px; margin-right:20px;">
+                          <a href="/lihat_hasil_panen_petani/{{$panen -> id_panen}}" class="px-3 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-500 border border-transparent rounded-lg active:bg-green-500 hover:bg-green-700 focus:outline-none focus:shadow-outline-green">
+                            Lihat
+                          </a>
+                        </div>
                       </td>
                     </tr>
                     @endforeach
-                    @endif
                   </tbody>
                 </table>
               </div>

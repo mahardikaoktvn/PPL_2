@@ -9,5 +9,6 @@ use App\Models\TambahHasilPanen;
 class TambahHasilPanen extends Model
 {
     protected $table = 'hasil_panen';
-    protected $fillable = ['id_panen','id_lahan', 'panen_ke', 'tanggal_panen', 'hasil_panen', 'tanggal_penjualan', 'hasil_penjualan', 'foto_bukti_penjualan', 'bagi_hasil_petani', 'bagi_hasil_mitra'];
+    protected $primaryKey = 'id_panen';
+    protected $fillable = ['id_panen','id_lahan', 'panen_ke', 'tanggal_panen', 'hasil_panen', 'biaya_panen', 'umur_petik', 'panjang_buah', 'diameter_buah', 'warna', 'rendemen'];
 }

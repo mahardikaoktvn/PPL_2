@@ -242,75 +242,56 @@
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
               <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
-                  <thead>
-                    <tr
+                <tr
                       class="tracking-wide text-left text-gray-700 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                     >
-                      <th class="px-2 py-2 text-medium text-sm">Panenan</th>
+                      <th class="px-2 py-2 text-medium text-sm">Panen Ke</th>
                       <th class="px-2 py-2 text-medium text-sm">Tanggal Pemanenan</th>
                       <th class="px-2 py-2 text-medium text-sm">Hasil(kg)</th>
-                      <th class="px-2 py-2 text-medium text-sm">Tanggal Penjualan</th>
-                      <th class="px-2 py-2 text-medium text-sm">Hasil Penjualan(rp)</th>
-                      <th class="px-2 py-2 text-medium text-sm">Bukti Penjualan</th>
-                      <th class="px-2 py-2 text-medium text-sm">Bagi Hasil Mitra(rp)</th>
+                      <th class="px-2 py-2 text-medium text-sm">Kualitas Mutu</th>
+                      <th class="px-2 py-2 text-medium text-sm"></th>
                     </tr>
                   </thead>
                   <tbody
                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                   >
-                  @if($panen == 'null')
                     <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        -
-                      </td>
-                    </tr>
-                  @else
-                    @foreach($panen as $panen)
-                    <tr class="text-gray-700 dark:text-gray-400">
+                      @foreach($panen as $panen)
                       <td class="px-2 py-2 text-sm">
                         {{$panen -> panen_ke}}
                       </td>
                       <td class="px-2 py-2 text-sm">
-                      {{$panen -> tanggal_panen}}
+                        {{$panen -> tanggal_panen}}
                       </td>
                       <td class="px-2 py-2 text-sm">
                       {{$panen -> hasil_panen}}
                       </td>
                       <td class="px-2 py-2 text-sm">
-                      {{$panen -> tanggal_penjualan}}
+                      {{$panen -> kualitas_mutu}}
                       </td>
                       <td class="px-2 py-2 text-sm">
-                      {{$panen -> hasil_penjualan}}
+                        <div class="flex justify-end" style="margin-left: -80px; margin-right:20px;">
+                          <a class="px-2" href="/edit_hasil_panen/{{$panen -> id_panen}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                              <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                            </svg>
+                          </a>
+                          <a class="px-2" href="/lihat_hasil_panen/{{$panen -> id_panen}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                              <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                              <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                            </svg>
+                          </a>
+                          <a class="px-2" href="/hapus_hasil_panen/{{$panen -> id_panen}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg> 
+                          </a>
+                        </div>
                       </td>
-                      <td class="px-2 py-2 text-sm">
-                      <a href="/{{$panen -> foto_bukti_penjualan}}" target="_blank" class="px-1 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-500 border border-transparent rounded-lg active:bg-green-500 hover:bg-green-700 focus:outline-none focus:shadow-outline-green">
-                        Download
-                      </a>
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                      {{$panen -> bagi_hasil_mitra}}
-                      </td>
+                      @endforeach
                     </tr>
-                    @endforeach
-                    @endif
                   </tbody>
                 </table>
               </div>
