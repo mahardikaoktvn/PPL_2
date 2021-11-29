@@ -35,6 +35,10 @@ class UserController extends Controller
 
     public function simulasi(Request $request)
     {
+        $request -> validate([
+            'luaslahan' => ['required', 'integer', 'gt:0']
+        ]);
+        
         $luas = $request -> luaslahan;
         $jumlahbibit = round(4*(100*($luas/144)));
         $modal = number_format(29518000*($luas/144), 2, ",", ".");
@@ -60,6 +64,25 @@ class UserController extends Controller
         'bghslmitra1' => $bghslmitra1,
         'bghslmitra2' => $bghslmitra2,
         'bghslmitra3' => $bghslmitra3]);
+    }
+
+    public function updatefoto(Request $request){
+        $id = Auth::id();
+        $request -> validate([
+            'gambar' => ['image']
+        ]);
+
+        $pemilik = $id;
+        $imageName = $request->gambar->getClientOriginalName();
+        $request->gambar->move("images/admin/$pemilik/", $imageName);
+
+
+        User::where('id', $id)
+            ->update([
+            'profile_photo' => "images/admin/$pemilik/$imageName"
+        ]);
+
+        return redirect('/profile')->withErrors(['success' => 'Foto Profil berhasil diubah!']);
     }
 
     public function upload(Request $request, User $user){
@@ -101,7 +124,7 @@ class UserController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', 'min:6'],
-            'nik' => ['required', 'string', 'max:17'],
+            'nik' => ['required', 'string', 'min:15'],
             'alamat' => ['required', 'string', 'max:255'],
             'desa' => ['required', 'string', 'max:255'],
             'kecamatan' => ['required', 'string', 'max:255'],
@@ -122,7 +145,7 @@ class UserController extends Controller
 
         $user -> save();
 
-        return redirect('/login');
+        return redirect('/login')->withErrors(['success' => 'Pendaftaran akun berhasil!']);
     }
 
     public function lihat_hasil_panen($id)

@@ -34,6 +34,7 @@ Route::group(['middleware'=>['auth:user']], function(){
         Route::get('/profile', [UserController::class,'open']);
         Route::post('/editprofile', [UserController::class,'upload']);
         Route::get('/editprofile', [UserController::class,'edit']);
+        Route::post('/updatefotopetani',[UserController::class, 'updatefoto']);
         Route::get('/tambah_pengajuan_petani', [LahanController::class, 'ambil_kerjasama']);
         Route::post('/ajukan', [LahanController::class, 'ajukan_kerjasama']);
         Route::get('/detail_pengajuan_petani', [LahanController::class, 'coba']);
@@ -64,6 +65,7 @@ Route::group(['middleware'=>['auth:admin']], function(){
         Route::post('/update_pembayaran', [AdminController::class, 'update_pembayaran']);
         Route::get('/delete_pembayaran/{id}', [AdminController::class, 'delete_pembayaran']);
         Route::get('/hapus_hasil_panen/{id}', [AdminController::class, 'delete_hasilpanen']);
+        Route::post('/updatefoto',[AdminController::class, 'updatefoto']);
         Route::get('/tolak/{tolak}', [AdminController::class, 'tolak']);
         Route::get('/terima/{terima}', [AdminController::class, 'terima']);
         Route::get('/tolak_lahan/{tolak}', [AdminController::class, 'tolak_lahan']);

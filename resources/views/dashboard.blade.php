@@ -121,7 +121,7 @@
                   >
                     <img
                       class="object-cover w-full h-full rounded-full"
-                      src="{{$row -> profile_photo}}"
+                      src="/{{$row -> profile_photo}}"
                       alt=""
                       loading="lazy"
                     />

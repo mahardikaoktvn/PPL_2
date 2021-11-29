@@ -32,10 +32,17 @@
           <div class="image overflow-hidden">
             <img
               class="object-cover w-full h-full rounded"
-              src="{{ $user -> profile_photo}}"
+              src="/{{$user -> profile_photo}}"
               alt=""
               loading="lazy"
             />
+            <form action="/updatefotopetani" enctype="multipart/form-data" method="post">
+            @csrf
+            <label class="text-green-500 text-xs">
+                Update Foto Profil
+                <input class="form-control" type="file" name="gambar" onchange="form.submit()"/>
+            </label>
+            </form>
           </div>
           <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{$user -> nama}}</h1>
           {{-- <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3> --}}
@@ -72,6 +79,12 @@
       </div>
       <!-- Right Side -->
       <div class="w-full md:w-9/12 mx-2 h-64">
+      @error('gambar')
+        <h2 class="mb-4 mt-6 text-xl dark:text-red-400">{{ $message }}</h2>
+      @enderror
+      @error('success')
+        <h2 class="mb-4 mt-6 text-xl text-green-700 dark:text-green-200">{{$message}}</h2>
+      @enderror
         <!-- Profile tab -->
         <!-- About Section -->
         <div class="bg-white p-3 shadow-sm rounded-sm">
@@ -143,5 +156,9 @@
     </div>
   </div>
 </div>
-
+<style type="text/css">
+  label > input[type=file] {
+    display: none;
+  }
+</style>
 @endsection

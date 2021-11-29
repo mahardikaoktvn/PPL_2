@@ -7,6 +7,9 @@
             >
               Tambah Data Hasil Panen
             </h2>
+            @if($errors->any())
+              <h2 class="mb-4 mt-6 text-xl font-semibold text-red-700 dark:text-red-200">{{$errors->first()}}</h2>
+            @endif
             <div
               class="px-4 py-3 mt-4 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
             >
@@ -22,6 +25,9 @@
                   value="{{$data->panen_ke}}"
                   required
                 />
+                @error('panen_ke')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               </label>
               <input type="hidden" name="id_lahan" value="{{$lahan -> id_lahan}}">
               <label class="block text-sm">
@@ -31,8 +37,13 @@
                   type="date"
                   name="tanggal_panen"
                   value="{{$data->tanggal_panen}}"
+                  id="txtDate"
                   required
                 />
+                @error('tanggal_panen')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
+              </label>
                 <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Hasil (Kg)</span>
                 <input
@@ -42,6 +53,9 @@
                   value="{{$data->hasil_panen}}"
                   required
                 />
+                @error('hasil_panen')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               </label>
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Pengeluaran</span>
@@ -52,6 +66,9 @@
                   value="{{$data->biaya_panen}}"
                   required
                 />
+                @error('biaya_panen')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               </label>
               <div class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
@@ -254,6 +271,7 @@
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   type="date"
                   name="tanggal_panen"
+                  id="txtDate"
                   required
                 />
                 <label class="block text-sm">

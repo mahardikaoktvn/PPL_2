@@ -25,8 +25,8 @@ class LoginController extends Controller
     public function proses_login(Request $request)
     {
         $request -> validate([
-            'email' => 'required',
-            'password' => 'required',
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
         
         $kredensil = $request->only('email','password');
@@ -38,7 +38,7 @@ class LoginController extends Controller
         elseif (Auth::guard('user')->attempt($kredensil)) {
             return redirect()->intended('/');
         }
-        return redirect('login')->with('error','Email tidak terdaftar!');
+        return redirect('login')->withErrors(['msg' => 'Email atau password yang dimasukkan salah!']);
     }
 
     public function logout(Request $request)

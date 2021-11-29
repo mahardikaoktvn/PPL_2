@@ -35,6 +35,9 @@
             required
             type="email"
           />
+          @error('email')
+            <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+          @enderror
         </label>
         @if($errors->has('id'))
         <span class="error">{{ $errors->first('email') }}</span>
@@ -49,6 +52,9 @@
             name="password"
             required autocomplete="new-password"
           />
+          @error('password')
+            <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+          @enderror
         </label>
         @if($errors->has('id'))
         <span class="error">{{ $errors->first('password') }}</span>
@@ -63,6 +69,9 @@
             type="password"
             required
           />
+          @error('password_confirmation')
+            <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+          @enderror
         </label>
         @if($errors->has('id'))
         <span class="error">{{ $errors->first('password_confirmation') }}</span>
@@ -76,6 +85,9 @@
             name="nama" 
             required
           />
+          @error('nama')
+            <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+          @enderror
         </label>
         @if($errors->has('id'))
         <span class="error">{{ $errors->first('nama') }}</span>
@@ -89,10 +101,10 @@
             name="nik" 
             required
           />
+          @error('nik')
+            <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+          @enderror
         </label>
-        @if($errors->has('id'))
-        <span class="error">{{ $errors->first('nik') }}</span>
-        @endif
         <label class="block text-sm">
           <span class="text-gray-700 dark:text-gray-400">Alamat</span>
           <input
@@ -102,10 +114,10 @@
             name="alamat" 
             required
           />
+          @error('alamat')
+            <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+          @enderror
         </label>
-        @if($errors->has('id'))
-        <span class="error">{{ $errors->first('alamat') }}</span>
-        @endif
         <label class="block text-sm">
           <span class="text-gray-700 dark:text-gray-400">Desa</span>
           <input
@@ -115,10 +127,10 @@
             name="desa" 
             required
           />
+          @error('desa')
+            <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+          @enderror
         </label>
-        @if($errors->has('id'))
-        <span class="error">{{ $errors->first('desa') }}</span>
-        @endif
         <label class="block text-sm">
           <span class="text-gray-700 dark:text-gray-400">Kecamatan</span>
           <input
@@ -128,10 +140,10 @@
             name="kecamatan" 
             required
           />
+          @error('kecamatan')
+            <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+          @enderror
         </label>
-        @if($errors->has('id'))
-        <span class="error">{{ $errors->first('kecamatan') }}</span>
-        @endif
         <label class="block text-sm">
           <span class="text-gray-700 dark:text-gray-400">No Telepon</span>
           <input
@@ -141,10 +153,10 @@
             name="phone_number" 
             required
           />
+          @error('phone_number')
+            <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+          @enderror
         </label>
-        @if($errors->has('id'))
-        <span class="error">{{ $errors->first('phone_number') }}</span>
-        @endif
         <div class="flex mt-6 text-sm">
           <label class="flex items-center dark:text-gray-400">
             <input

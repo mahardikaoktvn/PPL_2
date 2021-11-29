@@ -32,7 +32,7 @@
           <div class="image overflow-hidden">
             <img
               class="object-cover w-full h-full rounded"
-              src="{{$data->profile_photo}}"
+              src="/{{$data->profile_photo}}"
               alt=""
               loading="lazy"
             />

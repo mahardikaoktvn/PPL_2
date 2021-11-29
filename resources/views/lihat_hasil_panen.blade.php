@@ -67,6 +67,9 @@
     </div>
     <div class="w-full md:w-9/12 mx-2 h-64">
       <div class="bg-white p-3 shadow-sm rounded-sm">
+        @error('success')
+          <h2 class="mb-4 mt-1 text-xl text-green-700 dark:text-green-200">{{$message}}</h2>
+        @enderror
         <div
           class="flex items-center justify-between p-2 py-1 mb-5 text-sm font-semibold text-white bg-green-500 rounded-md shadow-md">
           <div class="flex items-center">

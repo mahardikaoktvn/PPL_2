@@ -73,6 +73,9 @@
       </div>
       <!-- Right Side -->
       <div class="w-full md:w-9/12 mx-2 h-64">
+        @error('success')
+          <h2 class="mb-4 mt-6 text-xl text-green-700 dark:text-green-200">{{$message}}</h2>
+        @enderror
         <div class="bg-white p-3 shadow-sm rounded-sm">
           <a
             class="flex items-center justify-between p-3 mb-5 text-sm font-semibold text-white bg-green-500 rounded-md shadow-md"
@@ -120,7 +123,7 @@
                 <div class="px-4 grid">
                   <img
                     class="object-cover"
-                    src="{{$data -> foto_bukti_lahan}}"
+                    src="/{{$data -> foto_bukti_lahan}}"
                     alt=""
                     width="200"
                     loading="lazy"

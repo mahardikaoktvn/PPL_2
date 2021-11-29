@@ -21,6 +21,9 @@
                   id="luas_lahan"
                   required
                 />
+                @error('luas_lahan')
+                  <label class="text-sm text-red-700 dark:text-red-400" >{{ $message }}</label>
+                @enderror
               </label>
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Alamat Lokasi Lahan</span>
@@ -31,6 +34,9 @@
                   id="lokasi_lahan"
                   required
                 />
+                @error('lokasi_lahan')
+                  <label class="text-sm text-red-700 dark:text-red-400" >{{ $message }}</label>
+                @enderror
               </label>
               <div class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
@@ -56,16 +62,22 @@
                   type="date"
                   class="block w-full mt-2 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   name="tanggal_tanam"
-                  id="tanggal_tanam"
+                  id="txtDate"
                 />
               </label>
               <div class="form-group py-3">
-                <label class="text-sm" for="exampleFormControlFile2">Upload foto bukti Lahan</label>
+                <label class="text-sm" for="exampleFormControlFile2">Upload foto bukti Lahan (format gambar)</label>
                 <input name="foto_bukti_lahan" id="foto_bukti_lahan" type="file" class="form-control-file" id="exampleFormControlFile2">
+                @error('foto_bukti_lahan')
+                  <label class="text-sm text-red-700 dark:text-red-400" >{{ $message }}</label>
+                @enderror
               </div>
               <div class="form-group py-3">
                 <label class="text-sm" for="exampleFormControlFile2">Upload file MOU (format docx/doc/pdf)</label>
                 <input name="dokumen_mou" id="dokumen_mou" type="file" class="form-control-file" id="exampleFormControlFile2">
+                @error('dokumen_mou')
+                  <label class="text-sm text-red-700 dark:text-red-400" >{{ $message }}</label>
+                @enderror
               </div>
               <div class="flex item-center justify-end space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row">
                 <a href="/"
@@ -113,6 +125,24 @@
                  $('#desa').empty();
                }
             });
+            });
+
+            $(function(){
+              var dtToday = new Date();
+              
+              var month = dtToday.getMonth() + 1;
+              var day = dtToday.getDate();
+              var year = dtToday.getFullYear();
+              if(month < 10)
+                  month = '0' + month.toString();
+              if(day < 10)
+                  day = '0' + day.toString();
+              
+              var maxDate = year + '-' + month + '-' + day;
+
+              // or instead:
+              // var maxDate = dtToday.toISOString().substr(0, 10);
+              $('#txtDate').attr('min', maxDate);
             });
         </script>
 @endsection

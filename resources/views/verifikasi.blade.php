@@ -46,12 +46,11 @@
                   Lihat Detail
                 </button>
               </a>
-            </div>             
+            </div> 
           </div> 
-          @endforeach       
+          @endforeach
         </div>      
       </div>
-      @include("partial.pagination")
     </div>
   </div>
 @endsection

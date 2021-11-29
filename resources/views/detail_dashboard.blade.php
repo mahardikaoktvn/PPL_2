@@ -32,7 +32,7 @@
           <div class="image overflow-hidden">
             <img
               class="object-cover w-full h-full rounded"
-              src="{{$orang -> profile_photo}}"
+              src="/{{$orang -> profile_photo}}"
               alt=""
               loading="lazy"
             />

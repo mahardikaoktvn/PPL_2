@@ -20,7 +20,7 @@ class LahanController extends Controller
         if (Auth::user()) {
             $docValidator = $request -> validate([
                 'lokasi_lahan' => 'required',
-                'luas_lahan' => 'required',
+                'luas_lahan' => 'required|gt:0',
                 'id_desa' => 'required',
                 'tanggal_tanam' => 'required',
                 'foto_bukti_lahan' => 'required|mimes:jpeg,jpg,png,gif',
@@ -88,7 +88,7 @@ class LahanController extends Controller
 
     public function upload_mou(Request $request){
         if (Auth::user()) {
-            $docValidator = $request -> validate([
+            $request -> validate([
                 'mou' => 'required|mimes:docx,doc,pdf',
             ]);
 
@@ -100,7 +100,7 @@ class LahanController extends Controller
             
             $mou -> save();
 
-            return redirect('/kerjasama')->with('message', 'Mou berhasil di upload!');;
+            return redirect('/kerjasama')->withErrors(['success' => 'Mou berhasil di upload!']);;
         }
     }
 }

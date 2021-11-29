@@ -33,10 +33,17 @@
             <img
               class="object-cover rounded"
               style="width:20rem;height:20rem;"
-              src="{{$data->profile_photo}}"
+              src="/{{$data->profile_photo}}"
               alt=""
               loading="lazy"
             />
+            <form action="/updatefoto" enctype="multipart/form-data" method="post">
+            @csrf
+            <label class="text-green-500 text-xs">
+                Update Foto Profil
+                <input class="form-control" type="file" name="gambar" onchange="form.submit()"/>
+            </label>
+            </form>
           </div>
           <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{$data->nama}}</h1>
           {{-- <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3> --}}
@@ -61,8 +68,14 @@
       </div>
       <!-- Right Side -->
       <div class="w-full md:w-9/12 mx-2 h-64">
+      @error('gambar')
+        <h2 class="mb-4 mt-6 text-xl dark:text-red-400">{{ $message }}</h2>
+      @enderror
         <!-- Profile tab -->
         <!-- About Section -->
+        @error('success')
+          <h2 class="mb-4 mt-6 text-xl text-green-700 dark:text-green-200">{{$message}}</h2>
+        @enderror
         <div class="bg-white p-3 shadow-sm rounded-sm">
           <a
             class="flex items-center justify-between p-3 mb-2 text-sm font-semibold text-white bg-green-500 rounded-md shadow-md"
@@ -124,11 +137,15 @@
               Edit Profil
             </button>
           </a>
-        </div>
+          </div>
         <!-- End of about section -->
       </div>
     </div>
   </div>
 </div>
-
+<style type="text/css">
+  label > input[type=file] {
+    display: none;
+  }
+</style>
 @endsection

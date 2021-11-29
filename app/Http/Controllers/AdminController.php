@@ -45,7 +45,6 @@ class AdminController extends Controller
 
     public function tampil_verifikasi()
     {
-
         $data = User::where('id_account_verify', 0)->get();
         return view('verifikasi',['title' => 'Verifikasi Akun', 'data' => $data]);
     }
@@ -123,11 +122,30 @@ class AdminController extends Controller
         return view('edit_profil_mitra', ['title' => 'Edit Profile Mitra', 'data' => $data]);
     }
 
+    public function updatefoto(Request $request){
+        $id = Auth::id();
+        $request -> validate([
+            'gambar' => ['image']
+        ]);
+
+        $pemilik = $id;
+        $imageName = $request->gambar->getClientOriginalName();
+        $request->gambar->move("images/admin/$pemilik/", $imageName);
+
+
+        AdminModel::where('id_mitra', $id)
+            ->update([
+            'profile_photo' => "images/admin/$pemilik/$imageName"
+        ]);
+
+        return redirect('/profile_mitra')->withErrors(['success' => 'Foto Profil berhasil diubah!']);
+    }
+
     public function upload(Request $request, AdminModel $admin){
         $id = Auth::id();
         $request -> validate([
-            'nama' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'max:255'],
+            'nama' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'email', 'max:255'],
         ]);
 
         if ($request -> gambar) {
@@ -152,7 +170,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return redirect('/profile_mitra')->with('status', 'Data Berhasil Ditambahkan!');
+        return redirect('/profile_mitra')->withErrors(['success' => 'Data berhasil diubah!']);
     }
 
     public function tolak_lahan(Lahan $tolak)
@@ -182,13 +200,16 @@ class AdminController extends Controller
     }
 
     public function tambah_hasilpanen(Request $request)
-    {
-        /*$lahan = Lahan::where('id_lahan', $request -> id_lahan)->first();
-        $petani = User::where('id', $lahan -> id_petani)->first();
-        $id_petani = $petani -> id;
-        $imageName = $request->foto_bukti_penjualan->getClientOriginalName();
-        $request-> foto_bukti_penjualan->move("assets/user/$id_petani", $imageName);*/
-        
+    {   
+        $request -> validate([
+            'panen_ke' => ['required', 'integer', 'max:4'],
+            'tanggal_panen' => ['required', 'date'],
+            'hasil_panen' => ['required', 'integer', 'gt:0'],
+            'biaya_panen' => ['required', 'integer' , 'gt:0']
+        ]);
+
+        $kualitas = "ungraded";
+
         if ($request ->umur_petik == "2-4") {
             if ($request -> panjang_buah == "max 17") {
                 if ($request -> diameter_buah == "<1") {
@@ -225,30 +246,40 @@ class AdminController extends Controller
             }
         }
 
-        else {
-            $kualitas = "Ungraded";
+        if ($kualitas == "ungraded") {
+            return redirect()->back()->withErrors(['msg' => 'Data yang dimasukkan tidak valid!']);
         }
 
-        $data = new TambahHasilPanen;
-        $data -> id_lahan = $request -> id_lahan;
-        $data -> panen_ke = $request -> panen_ke;
-        $data -> tanggal_panen = $request -> tanggal_panen;
-        $data -> hasil_panen = $request -> hasil_panen;
-        $data -> biaya_panen = $request -> biaya_panen;
-        $data -> umur_petik = $request -> umur_petik;
-        $data -> panjang_buah = $request -> panjang_buah;
-        $data -> diameter_buah = $request -> diameter_buah;
-        $data -> warna = $request -> warna;
-        $data -> rendemen = $request -> rendemen;
-        $data -> kualitas_mutu = $kualitas;
-        
-        $data -> save();
+        else {
+            $data = new TambahHasilPanen;
+            $data -> id_lahan = $request -> id_lahan;
+            $data -> panen_ke = $request -> panen_ke;
+            $data -> tanggal_panen = $request -> tanggal_panen;
+            $data -> hasil_panen = $request -> hasil_panen;
+            $data -> biaya_panen = $request -> biaya_panen;
+            $data -> umur_petik = $request -> umur_petik;
+            $data -> panjang_buah = $request -> panjang_buah;
+            $data -> diameter_buah = $request -> diameter_buah;
+            $data -> warna = $request -> warna;
+            $data -> rendemen = $request -> rendemen;
+            $data -> kualitas_mutu = $kualitas;
+            
+            $data -> save();
 
-        return redirect("/detail_kerjasama/$request->id_lahan");
+            return redirect("/detail_kerjasama/$request->id_lahan")->withErrors(['success' => 'Hasil Panen Berhasil Ditambahkan!']);
+        }
     }
 
     public function edit_hasilpanen(Request $request, $id)
     {
+        $request -> validate([
+            'panen_ke' => ['required', 'integer', 'max:4'],
+            'tanggal_panen' => ['required', 'date'],
+            'hasil_panen' => ['required', 'integer', 'gt:0'],
+            'biaya_panen' => ['required', 'integer', 'gt:0']
+        ]);
+
+        $kualitas = "ungraded";
         
         if ($request ->umur_petik == "2-4") {
             if ($request -> panjang_buah == "max 17") {
@@ -286,11 +317,12 @@ class AdminController extends Controller
             }
         }
 
-        else {
-            $kualitas = "Ungraded";
+        if ($kualitas == "ungraded") {
+            return redirect()->back()->withErrors(['msg' => 'Data yang dimasukkan tidak valid!']);
         }
 
-        TambahHasilPanen::where('id_panen', $id)
+        else {
+            TambahHasilPanen::where('id_panen', $id)
             ->update([
                 'panen_ke' => $request -> panen_ke,
                 'tanggal_panen' => $request -> tanggal_panen,
@@ -303,8 +335,8 @@ class AdminController extends Controller
                 'rendemen' => $request -> rendemen,
                 'kualitas_mutu' => $kualitas
             ]);
-
-        return redirect("/detail_kerjasama/$request->id_lahan");
+        return redirect("/detail_kerjasama/$request->id_lahan")->withErrors(['success' => 'Hasil Panen Berhasil Diubah!']);
+        }
     }
 
     public function detail_pembayaran($id){
@@ -335,6 +367,13 @@ class AdminController extends Controller
 
     public function tambah_pembayaran(Request $request){
         
+        $request -> validate([
+            'pembeli' => ['required', 'integer'],
+            'berat' => ['required', 'integer', 'gt:0'],
+            'harga_terjual' => ['required', 'integer', 'gt:0'],
+            'bukti_pembayaran' => ['required', 'image']
+        ]);
+
         $panen = TambahHasilPanen::where('id_panen', $request -> id_panen)->first();
         $lahan = Lahan::where('id_lahan', $panen -> id_lahan)->first();
         $petani = User::where('id', $lahan -> id_petani)->first();
@@ -354,7 +393,7 @@ class AdminController extends Controller
         
         $data -> save();
 
-        return redirect("/lihat_hasil_panen/$request->id_panen");
+        return redirect("/lihat_hasil_panen/$request->id_panen")->withErrors(['success' => 'Data Pembayaran Berhasil Ditambahkan!']);
     }
 
     public function edit_pembayaran(PembayaranPanen $id){
@@ -363,6 +402,13 @@ class AdminController extends Controller
     }
 
     public function update_pembayaran(Request $request){
+
+        $request -> validate([
+            'pembeli' => ['required', 'integer'],
+            'berat' => ['required', 'integer', 'gt:0'],
+            'harga_terjual' => ['required', 'integer', 'gt:0'],
+        ]);
+
         if ($request -> bukti_pembayaran) {
             $panen = TambahHasilPanen::where('id_panen', $request -> id_panen)->first();
             $lahan = Lahan::where('id_lahan', $panen -> id_lahan)->first();
@@ -393,7 +439,7 @@ class AdminController extends Controller
                 'bagi_hasil_mitra' => 0.6*$request-> harga_terjual
             ]);
         }
-        return redirect("/lihat_hasil_panen/$request->id_panen");
+        return redirect("/lihat_hasil_panen/$request->id_panen")->withErrors(['success' => 'Data Pembayaran Berhasil Diubah!']);
     }
 
     public function delete_pembayaran(PembayaranPanen $id){

@@ -2,11 +2,12 @@
 
 @section('dashboard')    
   <div class="container px-6 mx-auto grid">
-    @if(session()->has('message'))
-      <div class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-          {{ session()->get('message') }}
-      </div>
-      @endif
+  @error('mou')
+    <h2 class=" my-6 text-red-700 dark:text-red-400">{{ $message }}</h2>
+  @enderror
+  @error('success')
+    <h2 class="my-6 text-green-700 dark:text-green-400">{{ $message }}</h2>
+  @enderror
     <div class="flex items-center"
     {{-- style="grid-template-columns: repeat(3,minmax(0,1fr));" --}}
     >
@@ -40,7 +41,7 @@
             >
               <img
                 class="object-cover w-full h-full rounded-full"
-                src="{{$row -> profile_photo}}"
+                src="/{{$row -> profile_photo}}"
                 alt=""
                 loading="lazy"
               />

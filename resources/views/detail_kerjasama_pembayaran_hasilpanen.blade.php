@@ -22,8 +22,12 @@
                   type="date"
                   name="tanggal_transaksi"
                   value="{{$data->tanggal_transaksi}}"
+                  id="txtDate"
                   required
                 />
+                @error('tanggal_transaksi')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               </label>
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Pembeli</span>
@@ -34,6 +38,9 @@
                   value="{{$data->pembeli}}"
                   required
                 />
+                @error('pembeli')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               </label>
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Berat (Kg)</span>
@@ -44,6 +51,9 @@
                   value="{{$data->berat}}"
                   required
                 />
+                @error('berat')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               </label>
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Harga Terjual</span>
@@ -54,11 +64,17 @@
                   value="{{$data->harga_terjual}}"
                   required
                 />
+                @error('harga_terjual')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               </label>
               <div class="form-group py-3">
                 <label class="text-sm" for="exampleFormControlFile2">Perbarui foto bukti Penjualan</label>
                 <input name="bukti_pembayaran" type="file" class="form-control-file" id="exampleFormControlFile2">
               </div>
+                @error('bukti_pembayaran')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               <footer
                 class="flex items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800"
               >
@@ -83,6 +99,7 @@
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   type="date"
                   name="tanggal_transaksi"
+                  id="txtDate"
                   required
                 />
               </label>
@@ -94,6 +111,9 @@
                   name="pembeli"
                   required
                 />
+                @error('pembeli')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               </label>
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Berat (Kg)</span>
@@ -103,6 +123,9 @@
                   name="berat"
                   required
                 />
+                @error('berat')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               </label>
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Harga Terjual</span>
@@ -112,11 +135,17 @@
                   name="harga_terjual"
                   required
                 />
+                @error('harga_terjual')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               </label>
               <div class="form-group py-3">
                 <label class="text-sm" for="exampleFormControlFile2">Upload foto bukti Penjualan</label>
                 <input name="bukti_pembayaran" type="file" class="form-control-file" id="exampleFormControlFile2">
               </div>
+              @error('bukti_pembayaran')
+                  <h2 class="text-red-700 dark:text-red-400">{{ $message }}</h2>
+                @enderror
               <footer
                 class="flex items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800"
               >
