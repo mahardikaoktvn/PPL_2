@@ -36,6 +36,11 @@
             <form action="/simulasi" method="post">
             @csrf
             <input class="mt-4 form-control rounded shadow-xs" placeholder="Luas Lahan meter persegi" type="type" name="luaslahan" required>
+            <div>
+            @error('luaslahan')
+              <label class="text-sm text-red-700 dark:text-red-400" >{{ $message }}</label>
+            @enderror
+            </div>
             <a>
               <button type="submit">
                 Lihat Prediksi
